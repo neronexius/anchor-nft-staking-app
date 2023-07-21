@@ -1,19 +1,26 @@
 import {FC} from "react"
-import { HStack, Spacer, Box } from "@chakra-ui/react"
-import { WalletConnectButton } from "@solana/wallet-adapter-react-ui"
+import { HStack, Spacer, Box, Text } from "@chakra-ui/react"
+import dynamic from "next/dynamic"
+import styles from "../styles/Home.module.css";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
 
 const NavBar:FC = () => {
+    const WalletMultiButtonDynamic = dynamic(
+        async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
+        { ssr: false }
+    );
+    
 
     return(
-    <Box 
-    width='100%'
-    bg='black'
-    height='10%'
-    >
+    <div>
         <HStack>
-            <WalletConnectButton></WalletConnectButton>
+            <Text
+            color={"black"}
+            >LOGO HERE</Text>
+            <Spacer/>
+            <WalletMultiButtonDynamic/>
         </HStack>
-    </Box>
+    </div>
     )
 }
 
